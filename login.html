@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Entrar | ConectaHabilitação</title>
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🚗</text></svg>">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .login-page {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #f0f7ff 0%, #e8f4fc 50%, #f5f0ff 100%);
+            padding: 2rem;
+        }
+        
+        .login-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            max-width: 1000px;
+            width: 100%;
+            background: white;
+            border-radius: 1.5rem;
+            overflow: hidden;
+            box-shadow: 0 25px 50px -12px rgba(0,0,0,0.25);
+        }
+        
+        .login-left {
+            background: linear-gradient(135deg, #2563eb 0%, #7c3aed 100%);
+            color: white;
+            padding: 3rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        
+        .login-left h2 {
+            font-size: 2rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+        }
+        
+        .login-left p {
+            opacity: 0.9;
+            margin-bottom: 2rem;
+            line-height: 1.7;
+        }
+        
+        .login-benefits {
+            list-style: none;
+        }
+        
+        .login-benefits li {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            margin-bottom: 1rem;
+            font-size: 0.9375rem;
+        }
+        
+        .login-benefits li span {
+            width: 24px;
+            height: 24px;
+            background: rgba(255,255,255,0.2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.75rem;
+        }
+        
+        .login-right {
+            padding: 3rem;
+        }
+        
+        .login-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        
+        .login-header .logo {
+            justify-content: center;
+            margin-bottom: 1.5rem;
+        }
+        
+        .login-header h3 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+        
+        .login-header p {
+            color: var(--text-secondary);
+            font-size: 0.9375rem;
+        }
+        
+        .login-form {
+            display: flex;
+            flex-direction: column;
+            gap: 1.25rem;
+        }
+        
+        .login-form .form-group {
+            margin-bottom: 0;
+        }
+        
+        .login-form .form-group input {
+            padding: 1rem;
+        }
+        
+        .remember-forgot {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.875rem;
+        }
+        
+        .remember-forgot label {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            cursor: pointer;
+        }
+        
+        .remember-forgot a {
+            color: var(--primary);
+        }
+        
+        .login-divider {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin: 1.5rem 0;
+            color: var(--text-muted);
+            font-size: 0.875rem;
+        }
+        
+        .login-divider::before,
+        .login-divider::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: var(--border);
+        }
+        
+        .social-login {
+            display: flex;
+            gap: 1rem;
+        }
+        
+        .social-btn {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            padding: 0.875rem;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            border-radius: 0.5rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        
+        .social-btn:hover {
+            background: var(--bg-tertiary);
+        }
+        
+        .login-footer {
+            text-align: center;
+            margin-top: 1.5rem;
+            font-size: 0.9375rem;
+            color: var(--text-secondary);
+        }
+        
+        .login-footer a {
+            color: var(--primary);
+            font-weight: 600;
+        }
+        
+        .tabs {
+            display: flex;
+            margin-bottom: 1.5rem;
+            border-bottom: 2px solid var(--border);
+        }
+        
+        .tab {
+            flex: 1;
+            padding: 1rem;
+            text-align: center;
+            font-weight: 600;
+            color: var(--text-secondary);
+            cursor: pointer;
+            border-bottom: 2px solid transparent;
+            margin-bottom: -2px;
+            transition: all 0.2s;
+        }
+        
+        .tab.active {
+            color: var(--primary);
+            border-bottom-color: var(--primary);
+        }
+        
+        .tab-content {
+            display: none;
+        }
+        
+        .tab-content.active {
+            display: block;
+        }
+        
+        @media (max-width: 768px) {
+            .login-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .login-left {
+                display: none;
+            }
+            
+            .social-login {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="login-page">
+        <div class="login-container">
+            <div class="login-left">
+                <h2>Bem-vindo de volta!</h2>
+                <p>Acesse sua conta para gerenciar seu perfil, ver estatísticas e conectar-se com novos alunos.</p>
+                
+                <ul class="login-benefits">
+                    <li><span>✓</span> Gerencie seu perfil e disponibilidade</li>
+                    <li><span>✓</span> Acompanhe suas estatísticas de visualização</li>
+                    <li><span>✓</span> Receba notificações de novos contatos</li>
+                    <li><span>✓</span> Ative destaque para mais visibilidade</li>
+                    <li><span>✓</span> Acesse ofertas exclusivas de parceiros</li>
+                </ul>
+            </div>
+            
+            <div class="login-right">
+                <div class="login-header">
+                    <a href="index.html" class="logo">
+                        <span class="logo-icon">🚗</span>
+                        <span class="logo-text">Conecta<strong>Habilitação</strong></span>
+                    </a>
+                    <h3>Acesse sua conta</h3>
+                    <p>Entre para continuar</p>
+                </div>
+                
+                <div class="tabs">
+                    <div class="tab active" onclick="switchTab('instrutor')">Sou Instrutor</div>
+                    <div class="tab" onclick="switchTab('aluno')">Sou Aluno</div>
+                </div>
+                
+                <div id="tab-instrutor" class="tab-content active">
+                    <form class="login-form" onsubmit="handleLogin(event, 'instrutor')">
+                        <div class="form-group">
+                            <label for="email-instrutor">E-mail</label>
+                            <input type="email" id="email-instrutor" placeholder="seu@email.com" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="senha-instrutor">Senha</label>
+                            <input type="password" id="senha-instrutor" placeholder="••••••••" required>
+                        </div>
+                        
+                        <div class="remember-forgot">
+                            <label>
+                                <input type="checkbox"> Lembrar-me
+                            </label>
+                            <a href="#">Esqueci minha senha</a>
+                        </div>
+                        
+                        <button type="submit" class="btn btn-primary btn-lg btn-full">Entrar</button>
+                    </form>
+                    
+                    <div class="login-divider">ou continue com</div>
+                    
+                    <div class="social-login">
+                        <button class="social-btn">
+                            <span>🔵</span> Google
+                        </button>
+                        <button class="social-btn">
+                            <span>🔷</span> Facebook
+                        </button>
+                    </div>
+                    
+                    <p class="login-footer">
+                        Ainda não tem conta? <a href="index.html#cadastro">Cadastre-se grátis</a>
+                    </p>
+                </div>
+                
+                <div id="tab-aluno" class="tab-content">
+                    <form class="login-form" onsubmit="handleLogin(event, 'aluno')">
+                        <div class="form-group">
+                            <label for="email-aluno">E-mail</label>
+                            <input type="email" id="email-aluno" placeholder="seu@email.com" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="senha-aluno">Senha</label>
+                            <input type="password" id="senha-aluno" placeholder="••••••••" required>
+                        </div>
+                        
+                        <div class="remember-forgot">
+                            <label>
+                                <input type="checkbox"> Lembrar-me
+                            </label>
+                            <a href="#">Esqueci minha senha</a>
+                        </div>
+                        
+                        <button type="submit" class="btn btn-primary btn-lg btn-full">Entrar</button>
+                    </form>
+                    
+                    <div class="login-divider">ou continue com</div>
+                    
+                    <div class="social-login">
+                        <button class="social-btn">
+                            <span>🔵</span> Google
+                        </button>
+                        <button class="social-btn">
+                            <span>🔷</span> Facebook
+                        </button>
+                    </div>
+                    
+                    <p class="login-footer">
+                        Ainda não tem conta? <a href="#">Criar conta de aluno</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        function switchTab(tab) {
+            document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+            document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+            
+            event.target.classList.add('active');
+            document.getElementById('tab-' + tab).classList.add('active');
+        }
+        
+        function handleLogin(e, type) {
+            e.preventDefault();
+            
+            // Em produção, aqui teria autenticação real
+            alert(`Login de ${type} realizado com sucesso!\n\nEm produção, você seria redirecionado para o painel.`);
+        }
+    </script>
+</body>
+</html>
