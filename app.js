@@ -237,23 +237,33 @@ let selectedBoost = { days: 30, price: 79.90 };
 // Buscar instrutores do banco
 async function fetchInstrutores() {
     try {
-        const query = supabase.from('instrutores');
-        await query.select('*');
-        query.eq('status', 'ativo');
-        query.order('destaque_ate', { ascending: false });
+        const url = `${SUPABASE_URL}/rest/v1/instrutores?select=*&status=eq.ativo&order=destaque_ate.desc.nullslast`;
         
-        const { data, error } = await query.execute();
+        console.log('Buscando instrutores de:', url);
         
-        if (error) {
-            console.warn('Erro ao buscar instrutores, usando dados mock:', error);
-            return instrutoresMock;
+        const response = await fetch(url, {
+            method: 'GET',
+            headers: {
+                'apikey': SUPABASE_ANON_KEY,
+                'Authorization': `Bearer ${SUPABASE_ANON_KEY}`
+            }
+        });
+        
+        if (!response.ok) {
+            const errorData = await response.json();
+            console.warn('Erro na resposta:', errorData);
+            throw new Error(errorData.message || 'Erro ao buscar');
         }
+        
+        const data = await response.json();
+        console.log('Instrutores encontrados:', data.length, data);
         
         if (data && data.length > 0) {
             return data;
         }
         
         // Se não houver dados, retorna mock
+        console.log('Nenhum instrutor no banco, usando mock');
         return instrutoresMock;
     } catch (error) {
         console.warn('Erro ao conectar com o banco, usando dados mock:', error);
