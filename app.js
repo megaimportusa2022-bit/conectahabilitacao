@@ -237,7 +237,7 @@ let selectedBoost = { days: 30, price: 79.90 };
 // Buscar instrutores do banco
 async function fetchInstrutores() {
     try {
-        const url = `${SUPABASE_URL}/rest/v1/instrutores?select=*&status=eq.ativo&order=destaque_ate.desc.nullslast`;
+        const url = `${SUPABASE_URL}/rest/v1/instrutores?select=*&order=created_at.desc`;
         
         console.log('Buscando instrutores de:', url);
         
